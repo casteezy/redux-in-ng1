@@ -1,4 +1,4 @@
-// Constants
+///////////////////////////// Constants /////////////////////////////
 
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_CURRENT_CATEGORY = 'GET_CURRENT_CATEGORY';
@@ -12,7 +12,25 @@ const initialCategories = [
 ];
 
 
-// Reducers
+///////////////////////////// Actions /////////////////////////////
+export const CategoriesActions = () => {
+    "use strict";
+    const getCategories = (categories) => {
+        return { type: GET_CATEGORIES, payload: categories };
+    };
+
+    const selectCategory = (category) => {
+        return { type: GET_CURRENT_CATEGORY, payload: category };
+    };
+
+    return {
+        getCategories,
+        selectCategory
+    }
+};
+
+
+///////////////////////////// Reducers /////////////////////////////
 // ALWAYS stateless, testable.
 
 /**
