@@ -3,15 +3,17 @@ import { categories, category, GET_CATEGORIES, GET_CURRENT_CATEGORY } from './ca
 class CategoriesController {
 
     constructor($timeout, store) {
-
+        this.categories = []; // ? not in original code
         this.$timeout = $timeout;
         this.store = store;
     }
 
     $onInit() {
         // Separate set from get state
-        this.store.dispatch({type: GET_CATEGORIES})
-        this.categories = this.store.getState();
+        this.unsubscribe = this.store.subscribe(() => {
+           this.categories = this.store.getState();
+        });
+        this.store.dispatch({type: GET_CATEGORIES});
 
         this.$timeout(() => {
             const payload = [
@@ -19,7 +21,6 @@ class CategoriesController {
             ];
 
             this.store.dispatch({type: GET_CATEGORIES, payload});
-            this.categories = this.store.getState();
         }, 3000);
 
         // Will fail
@@ -29,7 +30,6 @@ class CategoriesController {
             ];
 
             this.store.dispatch({type: GET_CATEGORIES, payload});
-            this.categories = this.store.getState();
         }, 6000);
     }
 
