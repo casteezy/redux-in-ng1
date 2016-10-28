@@ -5,6 +5,7 @@ import ngRedux from 'ng-redux';
 // import ComponentsModule from './components/components';
 
 import {categories, category} from './components/categories/categories.state';
+import {bookmarks, bookmark} from './components/bookmarks/bookmarks.state';
 import {combineReducers} from 'redux';
 
 // import template from './app.html';
@@ -13,7 +14,9 @@ import {combineReducers} from 'redux';
 // Make reducers available to the rest of the app
 const rootReducer = combineReducers({
     categories,
-    category
+    category,
+    bookmarks,
+    bookmark
 });
 
 const config = $ngReduxProvider => {

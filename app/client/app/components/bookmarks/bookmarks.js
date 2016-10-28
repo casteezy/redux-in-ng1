@@ -1,39 +1,61 @@
 import angular from 'angular';
 import SaveBookmarksModule from './save-bookmark/save-bookmark';
+import {BookmarksActions} from './bookmarks.state'
 
-import template from './categories.html';
+import template from './bookmarks.html';
 import './bookmarks.css';
 
 class BookmarksController {
-    constructor($ngRedux, BookmarksModel) {
+    constructor($ngRedux, BookmarksActions) {
         'ngInject';
 
         this.store = $ngRedux;
-        this.BookmarksModel = BookmarksModel;
+        this.BookmarksActions = BookmarksActions;
         // bind to this
     }
 
     $onInit() {
-        this.BookmarksModel.getBookmarks()
-            .then(result => this.bookmarks = result);
-        this.deleteBookmark = this.BookmarksModel.deleteBookmark;
-
         this.store.subscribe(() => {
+            this.bookmarks = this.store.getState().bookmarks;
+            this.currentBookmark = this.store.getState().bookmark;
             this.currentCategory = this.store.getState().category;
         });
 
-        this.reset();
+        this.store.dispatch(this.BookmarksActions.getBookmarks());
     }
 
-    createBookmark() {
-        this.createBookmark = this.initNewBookmark();
+    saveBookmark(bookmark) {
     }
 
-    editBookmark(bookmark) {
-        this.createBookmark = bookmark;
+    deleteBookmark(bookmark) {
     }
 
-    initNewBookmark() {
+    selectBookmark(bookmark) {
+        this.store.dispatch(
+            this.BookmarksActions.selectBookmark(bookmark)
+        );
+    }
 
+    resetSelectedBookmark() {
+        this.store.dispatch(
+            this.BookmarksActions.resetSelectedBookmark()
+        );
+    }
+
+    onSave(bm) {
+        this.saveBookmark(bm);
+        this.resetSelectedBookmark();
     }
 }
+
+const BookmarksComponent = {
+    template,
+    controller: BookmarksController,
+    controllerAs: 'bookmarksListCtrl'
+};
+
+const BookmarksModule = angular.module('bookmarks', [
+    SaveBookmarksModule.name
+])
+    .factory('BookmarksActions', BookmarksActions)
+    .component('bookmarks', BookmarksComponent);

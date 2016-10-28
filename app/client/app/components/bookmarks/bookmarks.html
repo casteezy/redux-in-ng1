@@ -1,4 +1,4 @@
-<div class="bookmarks">
+<div ng-repeat="bookmark in bookmarksListCtrl.bookmarks" class="bookmarks">
     <!-- TODO: TEMPLATE IN l7 -->
     <button type="button" class="close">&times;</button>
     <button type="button" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span>
@@ -13,5 +13,8 @@
         Create Bookmark
     </button>
 
-    <save-bookmark></save-bookmark>
+    <save-bookmark
+            bookmark=""
+            save=""
+            cancel=""></save-bookmark>
 </div>
