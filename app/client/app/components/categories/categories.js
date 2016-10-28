@@ -7,9 +7,10 @@ import './categories.css';
 
 class CategoriesController {
 
-    constructor($timeout, store, CategoriesActions) {
+    constructor($timeout, $ngRedux, CategoriesActions) {
+        'ngInject';
         this.$timeout = $timeout;
-        this.store = store;
+        this.store = $ngRedux;
         this.CategoriesActions = CategoriesActions;
     }
 

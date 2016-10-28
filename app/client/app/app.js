@@ -1,24 +1,29 @@
-import Store from './app.store';
-
 import angular from 'angular';
 // import CommonModule from './common/common';
 // import ComponentsModule from './components/components';
+
 import {categories, initialCategories} from './components/categories/categories.state';
+import ngRedux from 'ng-redux';
+
 // import template from './app.html';
 // import './app.css';
 
+const config = $ngReduxProvider => {
+    'ngInject';
 
-const store = new Store(categories, initialCategories);
+    $ngReduxProvider.createStoreWith(categories, [], [], initialCategories);
+};
 
 const AppComponent = {
     template
 };
 
 let appModule = angular.module('app', [
-    // CommonModule.name,
-    // ComponentsModule.name
+    CommonModule.name,
+    ComponentsModule.name,
+    ngRedux,
 ])
-    .value('store', store)
+    .config(config)
     .component('app', AppComponent);
 
 export default appModule;
