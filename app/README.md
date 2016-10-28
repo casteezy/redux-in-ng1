@@ -8,7 +8,7 @@ egghead.io's Lesson
 [x] Lesson 4
 [x] Lesson 5: Create Reusable Actions with Action Creators 
 [x] Lesson 6: Integrate ngRedux 
-[] Lesson 7
+[x] Lesson 7: Handle Multiple Models by Combining Reducers 
 [] Lesson 8
 [] Lesson 9
 [] Lesson 10

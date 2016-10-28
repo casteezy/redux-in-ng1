@@ -1,17 +1,25 @@
 import angular from 'angular';
+import ngRedux from 'ng-redux';
+
 // import CommonModule from './common/common';
 // import ComponentsModule from './components/components';
 
-import {categories, initialCategories} from './components/categories/categories.state';
-import ngRedux from 'ng-redux';
+import {categories, category} from './components/categories/categories.state';
+import {combineReducers} from 'redux';
 
 // import template from './app.html';
 // import './app.css';
 
+// Make reducers available to the rest of the app
+const rootReducer = combineReducers({
+    categories,
+    category
+});
+
 const config = $ngReduxProvider => {
     'ngInject';
 
-    $ngReduxProvider.createStoreWith(categories, [], [], initialCategories);
+    $ngReduxProvider.createStoreWith(rootReducer, []);
 };
 
 const AppComponent = {

@@ -4,6 +4,8 @@
   "description": "egghead.io tutorial",
   "main": "index.js",
   "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap-sass": "^3.3.7",
     "ng-redux": "^3.3.3",
     "redux": "^3.6.0"
   },
