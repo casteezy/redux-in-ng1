@@ -24,10 +24,16 @@ class BookmarksController {
         this.store.dispatch(this.BookmarksActions.getBookmarks());
     }
 
-    saveBookmark(bookmark) {
+    saveBookmark(bm) {
+        this.store.dispatch(
+            this.BookmarksActions.saveBookmark(bm)
+        );
     }
 
-    deleteBookmark(bookmark) {
+    deleteBookmark(bm) {
+        this.store.dispatch(
+            this.BookmarksActions.deleteBookmark(bm)
+        );
     }
 
     selectBookmark(bookmark) {
